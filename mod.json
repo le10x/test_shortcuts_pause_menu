@@ -6,12 +6,27 @@
 		"mac": "2.2081",
 		"ios": "2.2081"
 	},
-	"id": "le10x.shortcuts_pause",
+	"id": "le10x.leaderboard_in_pause_menu",
 	"version": "1.0.0",
-	"name": "Shortcuts In Pause Menu",
+	"name": "Leaderboard In Pause Menu",
 	"developer": "le10x",
-	"description": "description.",
-	"repository": "githubdotcom",
-	"tags": [],
-	"settings": {}
+	"description": "Adds a handy button inside the level pause menu to check the leaderboards immediately.",
+	"repository": "https://github.com",
+	"tags": ["interface", "enhancement", "utility"],
+	"dependencies": [
+		{
+			"id": "geode.node-ids",
+			"version": "v1.23.3",
+			"importance": "required"
+		}
+	],
+	"settings": {
+		"button-position": {
+			"name": "Button Position",
+			"description": "Choose where to place the leaderboard button or disable it entirely.",
+			"type": "title-choice",
+			"default": "Right",
+			"choices": ["Right", "Left", "Disable"]
+		}
+	}
 }
