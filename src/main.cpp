@@ -12,11 +12,11 @@ class $modify(LDPauseLayer, PauseLayer) {
 
 		CCMenu* targetMenu = nullptr;
 
-		// Map the choices to their respective menus
+		// Fixed: Added static_cast<CCMenu*> to fix the incompatible pointer types error
 		if (position == "Right") {
-			targetMenu = this->getChildByID("right-button-menu");
+			targetMenu = static_cast<CCMenu*>(this->getChildByID("right-button-menu"));
 		} else if (position == "Left") {
-			targetMenu = this->getChildByID("left-button-menu");
+			targetMenu = static_cast<CCMenu*>(this->getChildByID("left-button-menu"));
 		}
 
 		// Only create the button if a valid menu exists
