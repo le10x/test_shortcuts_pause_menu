@@ -23,10 +23,10 @@
 	"settings": {
 		"button-position": {
 			"name": "Button Position",
-			"description": "Choose where to place the leaderboard button or disable it entirely.",
-			"type": "title-choice",
+			"description": "Choose where to place the leaderboard button.",
+			"type": "string",
 			"default": "Right",
-			"choices": ["Right", "Left", "Disable"]
+			"choices": ["Right", "Left"]
 		}
 	}
 }
