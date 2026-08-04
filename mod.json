@@ -13,13 +13,12 @@
 	"description": "Adds a handy button inside the level pause menu to check the leaderboards immediately.",
 	"repository": "https://github.com",
 	"tags": ["interface", "enhancement", "utility"],
-	"dependencies": [
-		{
-			"id": "geode.node-ids",
+	"dependencies": {
+		"geode.node-ids": {
 			"version": "v1.23.3",
 			"importance": "required"
 		}
-	],
+	},
 	"settings": {
 		"button-position": {
 			"name": "Button Position",
