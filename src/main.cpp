@@ -1,0 +1,56 @@
+#include <Geode/Geode.hpp>
+
+using namespace geode::prelude;
+
+#include <Geode/modify/PauseLayer.hpp>
+class $modify(LDPauseLayer, PauseLayer) {
+	void customSetup() {
+		PauseLayer::customSetup();
+
+		// Fetch the setting value from mod.json
+		std::string position = Mod::get()->getSettingValue<std::string>("button-position");
+
+		CCMenu* targetMenu = nullptr;
+
+		// Map the choices to their respective menus
+		if (position == "Right") {
+			targetMenu = this->getChildByID("right-button-menu");
+		} else if (position == "Left") {
+			targetMenu = this->getChildByID("left-button-menu");
+		}
+
+		// Only create the button if a valid menu exists
+		if (targetMenu) {
+			auto spr = CCSprite::createWithSpriteFrameName("GJ_levelLeaderboardBtn_001.png");
+			spr->setScale(0.65f);
+
+			auto btn = CCMenuItemSpriteExtra::create(spr, this, menu_selector(LDPauseLayer::onLeaderboard));
+			targetMenu->addChild(btn);
+			btn->setID("leaderboard-button"_spr);
+			targetMenu->updateLayout();
+		}
+	}
+	
+	void onLeaderboard(CCObject* sender) {
+		if (PlayLayer::get()) { // Check if there is a PlayLayer
+			auto level = PlayLayer::get()->m_level;
+			auto levelLeaderboardType = static_cast<LevelLeaderboardType>(GameManager::get()->getIntGameVariable("0098"));
+			auto levelLeaderboardMode = static_cast<LevelLeaderboardMode>(GameManager::get()->getIntGameVariable("0164"));
+			LevelLeaderboard::create(level, levelLeaderboardType, levelLeaderboardMode)->show();
+			return;
+		}
+		FLAlertLayer::create("Uh Oh", "No PlayLayer found, you sure you in a level?", "OK")->show();
+	}
+};
+
+#include <Geode/modify/LevelLeaderboard.hpp>
+class $modify(LDLevelLeaderboard, LevelLeaderboard) {
+	bool init(GJGameLevel* p0, LevelLeaderboardType p1, LevelLeaderboardMode p2) {
+		if (!LevelLeaderboard::init(p0, p1, p2)) return false;
+
+		// Makes sure its above everything if its created without the show function (Fixes BetterInfo conflicts)
+		this->setZOrder(std::max(0x69, CCDirector::sharedDirector()->getRunningScene()->getHighestChildZ()));
+
+		return true;
+	}
+};
