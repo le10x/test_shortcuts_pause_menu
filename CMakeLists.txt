@@ -8,11 +8,10 @@ else()
 endif()
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
-project(ShortcutsInPauseMenu VERSION 1.0.0)
+project(LeaderboardInPauseMenu VERSION 1.0.0)
 
 add_library(${PROJECT_NAME} SHARED
-    src/Leaderboard.cpp
-    src/Globed.cpp
+    src/main.cpp
     # Add any extra C++ source files here
 )
 
